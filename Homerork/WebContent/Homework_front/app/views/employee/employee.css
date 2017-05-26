@@ -1,0 +1,36 @@
+.employee{
+
+}
+
+.label-input{
+    display: flex;
+    flex-direction: row;
+}
+
+.operation{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.area-add{
+    padding:10px;
+}
+
+.area-middle{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+}
+
+.area-remove{
+    padding:10px;
+}
+
+.list-content{
+    display: flex;
+}
+
+.table-content{
+    display: flex;
+    flex-direction: column;
+}

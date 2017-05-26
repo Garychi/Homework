@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration status='OFF'>
+	<appenders>
+		<Console name='Console' target='SYSTEM_OUT'>
+			<PatternLayout pattern='%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n' />
+		</Console>
+		<RollingRandomAccessFile name="RollingFile"
+			fileName="${filePath}/web.log" filePattern="${filePath}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log"
+			immediateFlush="false" append="true">
+			<patternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="30 MB" />
+			</Policies>
+		</RollingRandomAccessFile>
+		<RollingRandomAccessFile name="RollingAdviceLogFile"
+			fileName="D://log/webAdvice.log"
+			filePattern="D://log/webAdvice.log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log"
+			immediateFlush="false" append="true">
+			<patternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="50 MB" />
+			</Policies>
+		</RollingRandomAccessFile>
+		<JDBC name="dbAppender" tableName="LOGS">
+			<DataSource jndiName="java:comp/env/jdbc/initDB" />
+			<!-- <Column name="USER_ID" pattern="%X{UserID}" /> -->
+			<Column name="USER_ID" pattern="%X{User_ID}" />
+			<Column name="DATED" isEventTimestamp="true" />
+			<Column name="LEVEL_NAME" pattern="%level" />
+			<Column name="LOGGER" pattern="%logger" />
+			<Column name="MESSAGE" pattern="%message" />
+			<Column name="EXCEPTION_NO" pattern="%X{Exception_No}" />
+		</JDBC>
+		<Async name="ASYNC">
+			<AppenderRef ref="Console" level="INFO" />
+			<AppenderRef ref='RollingAdviceLogFile' level="INFO" />
+			<AppenderRef ref='dbAppender' level="INFO" />
+		</Async>
+	</appenders>
+	<loggers>
+		<root level="INFO">
+			<AppenderRef ref='ASYNC' level="INFO" />
+		</root>
+	</loggers>
+</configuration>

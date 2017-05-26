@@ -1,0 +1,67 @@
+<div class="station-detail">
+    <p-growl [(value)]="msgs"></p-growl>
+    <div class="operation">
+        <button (click)="back()" class="btn">返回</button>
+        <!--<button (click)="search()">搜尋</button>-->
+    </div>
+    <div class="content">
+        <div class="list-grid">
+            <div class="list-header">
+                <label>站點護士列表</label>
+                <div class="info">
+                    <!--{{'Station.empNo' | translate}}-->
+                    <div class="list-header-row">站點</div>
+                    <div class="list-header-row" style="margin-left: 20px;">修改時間</div>
+                    <div class="list-header-row" style="margin-left: 20px;">動作</div>
+                </div>
+            </div>
+            <div class="list-content" *ngFor="let station of Stations">
+                <div class="list-content-row">{{station.stationId}}</div>
+                <div class="list-content-row" style="margin-left: 20px;">{{station.modidate}}</div>
+                <div class="list-content-row" style="margin-left: 20px;">
+                    <!--<button (click)="viewStationDetail()">View</button>-->
+                    <button type="text" (click)="viewStationDetail(station)" pButton icon="fa-external-link-square"
+                            label="Show">
+                        View
+                    </button>
+                    <button (click)="deleteStation(station)">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-dialog" *ngIf="detailStation !=undefined">
+            <p-dialog header="站點護士明細" [(visible)]="display">
+                <!--<p-header>-->
+                <!--<label>站點護士明細</label>-->
+                <!--</p-header>-->
+                <div class="actionDiv">
+                    <div class="modal-operation">
+                        <button (click)="modalBack()" class="btn">返回</button>
+                        <button (click)="modalSave(detailStation)" class="btn btn-primary">儲存</button>
+                    </div>
+                    <div class="inputDiv">
+                        <label>站點名稱</label>
+                        <input style="margin-left: 5px;" placeholder="請出入站點名稱" [(ngModel)]="detailStation.stationName">
+                    </div>
+                </div>
+                <!--Modal Content-->
+                <div class="list-header">
+                    <label>站點護士列表</label>
+                    <div class="info">
+                        <!--{{'Station.empNo' | translate}}-->
+                        <div class="list-header-row">員工編號</div>
+                        <div class="list-header-row" style="margin-left: 20px;">加入時間
+                        </div>
+                    </div>
+                </div>
+                <div class="list-content" *ngFor="let workstation of detailWorkStation">
+                    <div class="list-content-row">{{workstation.id.empNo}}</div>
+                    <div class="list-content-row" style="margin-left: 20px;">{{workstation.joinDate}}</div>
+                </div>
+                <!--<p-footer>-->
+                <!--<p>Footer content here</p>-->
+                <!--</p-footer>-->
+            </p-dialog>
+        </div>
+    </div>
+</div>

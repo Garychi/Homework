@@ -1,0 +1,48 @@
+<div class="employee">
+    <p-growl [(value)]="msgs"></p-growl>
+    <div class="actionDiv">
+        <div class="operation">
+            <button (click)="back()" class="btn">返回</button>
+            <button (click)="insert()" class="btn btn-primary">新增</button>
+            <!--<button (click)="search()">搜尋</button>-->
+        </div>
+        <div class="inputDiv">
+            <div class="label-input">
+                <label>員工編號</label>
+                <input style="margin-left: 5px;" placeholder="請出入站點名稱" [(ngModel)]="empNo">
+            </div>
+            <div class="label-input">
+                <label>護士姓名</label>
+                <input style="margin-left: 5px;" placeholder="請輸入姓名" [(ngModel)]="nurseName">
+            </div>
+            <div class="label">
+                <label>分配站點</label>
+            </div>
+        </div>
+        <!--下方操作區-->
+        <div class="operation">
+            <div class="area-add">
+                <div class="list-header">
+                    <div class="list-header-row">負責區域</div>
+                </div>
+                <div class="list-content" *ngFor="let station of selectedStation">
+                    <div class="list-content-row" (click)="changeStation(station)">{{station.stationName}}</div>
+                </div>
+            </div>
+
+            <div class="area-middle">
+                <button (click)="removeStation()" class="btn btn-default"><label>-></label></button>
+                <button (click)="selectStation()" class="btn btn-default"><label><-</label></button>
+            </div>
+
+            <div class="area-remove">
+                <div class="list-header">
+                    <div class="list-header-row">區域</div>
+                </div>
+                <div class="list-content" *ngFor="let station of unSelectedStation">
+                    <div class="list-content-row" (click)="changeStation(station)">{{station.stationName}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="station">
+    <p-growl [(value)]="msgs"></p-growl>
+    <div class="actionDiv">
+        <div class="operation">
+            <button (click)="back()" class="btn">返回</button>
+            <button (click)="insertStation()" class="btn btn-primary">新增</button>
+            <!--<button (click)="search()">搜尋</button>-->
+        </div>
+        <div class="inputDiv">
+            <label>站點名稱</label>
+            <input style="margin-left: 5px;" placeholder="請出入站點名稱" [(ngModel)]="inputStation">
+        </div>
+    </div>
+</div>

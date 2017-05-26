@@ -1,0 +1,84 @@
+<div class="nurse-detail">
+    <p-growl [(value)]="msgs"></p-growl>
+    <!--護士列表-->
+    <div class="table-content">
+        <div class="top-operation">
+            <button (click)="back()" class="btn">返回</button>
+        </div>
+        <div class="list-grid">
+            <div class="list-header">
+                <div class="info" style="display: flex">
+                    <!--{{'Station.empNo' | translate}}-->
+                    <div class="list-header-row">員工編號</div>
+                    <div class="list-header-row" style="margin-left: 20px;">修改時間</div>
+                    <div class="list-header-row" style="margin-left: 20px;">動作</div>
+                </div>
+            </div>
+            <div class="list-content" *ngFor="let nurse of Nurses">
+                <div class="list-content-row">{{nurse.empNo}}</div>
+                <div class="list-content-row" style="margin-left: 20px;">{{nurse.modidate}}</div>
+                <div class="list-content-row" style="margin-left: 20px;">
+                    <!--<button (click)="viewStationDetail()">View</button>-->
+                    <button type="text" (click)="viewNurseDetail(nurse)" pButton icon="fa-external-link-square"
+                            label="Show">
+                        View
+                    </button>
+                    <button (click)="deleteNurseStation(nurse)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-dialog" *ngIf="detailNurse !=undefined">
+        <p-dialog header="工作站明細" [(visible)]="display">
+            <!--<p-header>-->
+            <!--<label>Header content here</label>-->
+            <!--</p-header>-->
+            <div class="operation">
+                <button (click)="modalBack()" class="btn">返回</button>
+                <button (click)="update()" class="btn btn-primary">儲存</button>
+            </div>
+            <div class="inputDiv" style="margin-top: 5px;">
+                <div class="label-input">
+                    <label>員工編號</label>
+                    <input style="margin-left: 5px;" placeholder="請出入員工編號" [(ngModel)]="detailNurse.empNo"
+                           disabled="true">
+                </div>
+                <div class="label-input">
+                    <label>護士姓名</label>
+                    <input style="margin-left: 5px;" placeholder="請輸入護士姓名" [(ngModel)]="detailNurse.name"
+                           disabled="true">
+                </div>
+                <div class="label">
+                    <label>分配站點</label>
+                </div>
+            </div>
+            <!--下方操作區-->
+            <div class="operation">
+                <div class="area-add">
+                    <div class="list-header">
+                        <div class="list-header-row">上工區域</div>
+                    </div>
+                    <div class="list-content" *ngFor="let station of selectedStation">
+                        <div class="list-content-row" (click)="changeStation(station)">{{station.id.stationId}}</div>
+                    </div>
+                </div>
+
+                <div class="area-middle">
+                    <button (click)="removeStation()">-></button>
+                    <button (click)="selectStation()"><-</button>
+                </div>
+
+                <div class="area-remove">
+                    <div class="list-header">
+                        <div class="list-header-row">下工區域</div>
+                    </div>
+                    <div class="list-content" *ngFor="let station of unSelectedStation">
+                        <div class="list-content-row" (click)="changeStation(station)">{{station.stationId}}</div>
+                    </div>
+                </div>
+            </div>
+        </p-dialog>
+    </div>
+</div>

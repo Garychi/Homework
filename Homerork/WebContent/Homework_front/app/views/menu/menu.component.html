@@ -1,0 +1,13 @@
+<!--<div class="menudiv">-->
+<!--<ul class="nav nav-pills nav-stacked">-->
+<!--<li *ngFor="let menu of menuArray">-->
+<!--<a routerLink={{menu.menuPath}} routerLinkActive="active">{{menu.menuName}}</a>-->
+<!--</li>-->
+<!--</ul>-->
+
+<div class="menu" *ngFor="let menu of menuArray">
+    <div class="menu-div">
+        <a routerLink={{menu.menuPath}} routerLinkActive="active">{{menu.menuName}}</a>
+    </div>
+</div>
+<!--</div>-->
